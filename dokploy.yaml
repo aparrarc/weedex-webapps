@@ -1,0 +1,17 @@
+version: '1'
+projects:
+  - name: weedex-landing
+    description: Landing principal weedex.es — Asistentes AI
+    applications:
+      - name: weedex-landing
+        description: Landing principal de Weedex Solutions
+        buildType: dockerfile
+        dockerfilePath: Dockerfile
+        ports:
+          - published: 3000
+            target: 80
+        domains:
+          - domain: weedex.es
+            https: true
+          - domain: www.weedex.es
+            https: true
