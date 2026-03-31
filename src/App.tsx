@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Menu, X, ChevronLeft, ChevronRight, ExternalLink, MessageCircle, Mail, Phone, Clock, CheckCircle, Zap, Shield, Smartphone } from 'lucide-react';
+import { Menu, X, ChevronLeft, ChevronRight, ExternalLink, Mail, Phone, Clock, CheckCircle, Zap, Shield, Smartphone, Send, MessageCircle } from 'lucide-react';
 
 /* ============================================
    DATOS DE LOS DEMOS
@@ -11,7 +11,11 @@ const DEMOS = [
     industry: 'Barbería',
     description: 'Reserva de citas con asistente IA que responde llamadas, transcribe y agenda automáticamente.',
     subdomain: 'barber',
-    screenshot: 'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=800&q=80',
+    screenshots: [
+      '/assets/demos/barber-home.png',
+      '/assets/demos/barber-booking.png',
+      '/assets/demos/barber-admin.png',
+    ],
     accentColor: '#f2c35b',
   },
   {
@@ -20,7 +24,11 @@ const DEMOS = [
     industry: 'Peluquería',
     description: 'Gestión inteligente de citas para salón de belleza con recordatorios automáticos por WhatsApp.',
     subdomain: 'beautyhair',
-    screenshot: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&q=80',
+    screenshots: [
+      '/assets/demos/beautyhair-home.png',
+      '/assets/demos/beautyhair-booking.png',
+      '/assets/demos/beautyhair-admin.png',
+    ],
     accentColor: '#e879a9',
   },
   {
@@ -29,7 +37,11 @@ const DEMOS = [
     industry: 'Peluquería Premium',
     description: 'Sistema de reservas premium con panel de administración y gestión de clientes.',
     subdomain: 'besthair',
-    screenshot: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&q=80',
+    screenshots: [
+      '/assets/demos/besthair-home.png',
+      '/assets/demos/besthair-booking.png',
+      '/assets/demos/besthair-admin.png',
+    ],
     accentColor: '#a78bfa',
   },
   {
@@ -38,7 +50,11 @@ const DEMOS = [
     industry: 'Estética y Bienestar',
     description: 'Automatización completa de agenda para centros de estética con múltiples profesionales.',
     subdomain: 'estetica',
-    screenshot: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&q=80',
+    screenshots: [
+      '/assets/demos/estetica-home.png',
+      '/assets/demos/estetica-booking.png',
+      '/assets/demos/estetica-admin.png',
+    ],
     accentColor: '#34d399',
   },
   {
@@ -47,15 +63,21 @@ const DEMOS = [
     industry: 'Hostelería',
     description: 'Reservas y gestión de mesas con asistente IA que confirma citas y envía recordatorios.',
     subdomain: 'restaurante',
-    screenshot: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80',
+    screenshots: [
+      'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80',
+      'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80',
+      'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80',
+    ],
     accentColor: '#fb923c',
   },
 ];
 
 /* ============================================
-   WHATSAPP DE ANTONIO
+   CONTACTOS
    ============================================ */
-const WHATSAPP_URL = 'https://wa.me/34637070994';
+const WHATSAPP_URL = 'https://wa.me/34919932156';
+const TELEGRAM_URL = 'https://t.me/Parritabrava';
+const EMAIL_URL = 'mailto:info@weedex.es';
 
 /* ============================================
    NAVBAR
@@ -86,7 +108,7 @@ function Navbar() {
           <a href="#demos" className="text-text-secondary hover:text-accent transition-colors text-sm label-text">Demos</a>
           <a href="#caracteristicas" className="text-text-secondary hover:text-accent transition-colors text-sm label-text">Características</a>
           <a href="#precios" className="text-text-secondary hover:text-accent transition-colors text-sm label-text">Precios</a>
-          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+          <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer">
             <button className="bg-accent text-text-inverse px-5 py-2.5 label-text text-[10px] font-bold tracking-widest hover:brightness-110 transition-all">
               HABLAR CON ANTONIO
             </button>
@@ -109,7 +131,7 @@ function Navbar() {
           <a href="#demos" onClick={() => setMobileOpen(false)} className="block text-text-secondary hover:text-accent label-text text-xs py-2">Demos</a>
           <a href="#caracteristicas" onClick={() => setMobileOpen(false)} className="block text-text-secondary hover:text-accent label-text text-xs py-2">Características</a>
           <a href="#precios" onClick={() => setMobileOpen(false)} className="block text-text-secondary hover:text-accent label-text text-xs py-2">Precios</a>
-          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+          <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer">
             <button className="bg-accent text-text-inverse w-full px-5 py-3 label-text text-[10px] font-bold tracking-widest">
               HABLAR CON ANTONIO
             </button>
@@ -157,9 +179,9 @@ function HeroSection() {
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up" style={{ animationDelay: '300ms' }}>
-          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+          <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer">
             <button className="bg-accent text-text-inverse px-8 py-4 label-text font-bold text-[10px] tracking-widest hover:brightness-110 transition-all flex items-center gap-2 w-full sm:w-auto justify-center">
-              <MessageCircle className="w-4 h-4" />
+              <Send className="w-4 h-4" />
               PEDIR DEMO GRATIS
             </button>
           </a>
@@ -196,6 +218,71 @@ function HeroSection() {
 }
 
 /* ============================================
+   DEMO SCREENSHOT CAROUSEL
+   ============================================ */
+function DemoScreenshotCarousel({ screenshots }: { screenshots: string[] }) {
+  const [idx, setIdx] = useState(0);
+
+  const prev = useCallback(() => setIdx(i => (i - 1 + screenshots.length) % screenshots.length), [screenshots.length]);
+  const next = useCallback(() => setIdx(i => (i + 1) % screenshots.length), [screenshots.length]);
+
+  return (
+    <div className="relative aspect-[16/10] overflow-hidden bg-surface-lowest">
+      {/* Images */
+      screenshots.map((src, i) => (
+        <div
+          key={src}
+          className="absolute inset-0 transition-opacity duration-500"
+          style={{ opacity: i === idx ? 1 : 0, zIndex: i === idx ? 1 : 0 }}
+        >
+          <img
+            src={src}
+            alt=""
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+      ))}
+
+      {/* Navigation arrows — only show when multiple screenshots */}
+      {screenshots.length > 1 && (
+        <>
+          <button
+            onClick={prev}
+            className="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-background/80 backdrop-blur-sm border border-border/40 flex items-center justify-center text-text-secondary hover:text-accent transition-all z-10"
+            aria-label="Imagen anterior"
+          >
+            <ChevronLeft className="w-3.5 h-3.5" />
+          </button>
+          <button
+            onClick={next}
+            className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-background/80 backdrop-blur-sm border border-border/40 flex items-center justify-center text-text-secondary hover:text-accent transition-all z-10"
+            aria-label="Siguiente imagen"
+          >
+            <ChevronRight className="w-3.5 h-3.5" />
+          </button>
+        </>
+      )}
+
+      {/* Industry badge */}
+      {/* Dots */}
+      {screenshots.length > 1 && (
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+          {screenshots.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setIdx(i)}
+              className={`h-1.5 rounded-full transition-all ${i === idx ? 'w-5 bg-accent' : 'w-1.5 bg-white/40 hover:bg-white/60'}`}
+              aria-label={`Ir a imagen ${i + 1}`}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ============================================
    DEMO CARD
    ============================================ */
 function DemoCard({ demo, isActive }: { demo: typeof DEMOS[0]; isActive: boolean }) {
@@ -204,27 +291,8 @@ function DemoCard({ demo, isActive }: { demo: typeof DEMOS[0]; isActive: boolean
   return (
     <div className={`flex-shrink-0 w-full md:w-[480px] transition-all duration-500 ${isActive ? 'opacity-100 translate-y-0' : 'opacity-40 translate-y-4'}`}>
       <div className="bg-background-card rounded-2xl overflow-hidden border border-border/30 hover:border-accent/30 transition-all">
-        {/* Screenshot */}
-        <div className="relative aspect-[16/10] overflow-hidden bg-surface-lowest">
-          <img
-            src={demo.screenshot}
-            alt={`Demo ${demo.name}`}
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
-          {/* Overlay badge */}
-          <div
-            className="absolute top-3 left-3 px-3 py-1 rounded-full text-[9px] label-text font-bold tracking-widest"
-            style={{ backgroundColor: `${demo.accentColor}22`, color: demo.accentColor, border: `1px solid ${demo.accentColor}44` }}
-          >
-            {demo.industry}
-          </div>
-          {/* Demo URL badge */}
-          <div className="absolute bottom-3 right-3 glass rounded-lg px-2.5 py-1.5 flex items-center gap-1.5">
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-            <span className="text-[9px] text-text-secondary label-text">{demo.subdomain}.weedex.es</span>
-          </div>
-        </div>
+        {/* Screenshot carousel */}
+        <DemoScreenshotCarousel screenshots={demo.screenshots} />
 
         {/* Info */}
         <div className="p-5">
@@ -232,6 +300,11 @@ function DemoCard({ demo, isActive }: { demo: typeof DEMOS[0]; isActive: boolean
             <div>
               <h3 className="serif-headline text-lg text-text-primary">{demo.name}</h3>
               <p className="text-text-muted text-xs mt-0.5">{demo.industry}</p>
+            </div>
+            {/* Demo URL badge */}
+            <div className="glass rounded-lg px-2.5 py-1.5 flex items-center gap-1.5">
+              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+              <span className="text-[9px] text-text-secondary label-text">{demo.subdomain}.weedex.es</span>
             </div>
           </div>
           <p className="text-text-secondary text-sm font-light mb-4 leading-relaxed">{demo.description}</p>
@@ -539,9 +612,9 @@ function PricingTeaser() {
         <p className="text-text-secondary text-base font-light mb-10 max-w-xl mx-auto">
           Sin contrato obligatorio, sin permanencia. Incluye asistente IA, transcripciones, интеграция WhatsApp y soporte técnico. Pago mensual, cancela cuando quieras.
         </p>
-        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+        <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer">
           <button className="bg-accent text-text-inverse px-10 py-4 label-text font-bold text-[10px] tracking-widest hover:brightness-110 transition-all inline-flex items-center gap-2">
-            <MessageCircle className="w-4 h-4" />
+            <Send className="w-4 h-4" />
             PEDIR DEMO PERSONALIZADA
           </button>
         </a>
@@ -569,15 +642,21 @@ function CTASection() {
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
-            <button className="bg-green-500 hover:bg-green-600 text-white px-8 py-4 label-text font-bold text-[10px] tracking-widest transition-all flex items-center gap-2 w-full sm:w-auto justify-center">
+            <button className="bg-[#25D366] hover:bg-[#1da851] text-white px-8 py-4 label-text font-bold text-[10px] tracking-widest transition-all flex items-center gap-2 w-full sm:w-auto justify-center">
               <MessageCircle className="w-4 h-4" />
-              WHATSAPP DE ANTONIO
+              WHATSAPP
             </button>
           </a>
-          <a href="mailto:forja@weedex.es">
-            <button className="border border-accent/30 text-accent px-8 py-4 label-text text-[10px] tracking-widest hover:bg-accent/10 transition-all w-full sm:w-auto">
-              <Mail className="w-4 h-4 inline mr-2" />
-              ESCRIBIR EMAIL
+          <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer">
+            <button className="bg-[#229ED9] hover:bg-[#1a8bc4] text-white px-8 py-4 label-text font-bold text-[10px] tracking-widest transition-all flex items-center gap-2 w-full sm:w-auto justify-center">
+              <Send className="w-4 h-4" />
+              TELEGRAM
+            </button>
+          </a>
+          <a href={EMAIL_URL}>
+            <button className="border border-accent/30 text-accent px-8 py-4 label-text text-[10px] tracking-widest hover:bg-accent/10 transition-all w-full sm:w-auto flex items-center gap-2">
+              <Mail className="w-4 h-4" />
+              EMAIL
             </button>
           </a>
         </div>
@@ -607,7 +686,7 @@ function Footer() {
             <a href="#demos" className="text-text-muted hover:text-accent text-xs transition-colors">Demos</a>
             <a href="#caracteristicas" className="text-text-muted hover:text-accent text-xs transition-colors">Características</a>
             <a href="#precios" className="text-text-muted hover:text-accent text-xs transition-colors">Precios</a>
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-accent text-xs transition-colors">Contacto</a>
+            <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-accent text-xs transition-colors">Contacto</a>
           </div>
         </div>
 
