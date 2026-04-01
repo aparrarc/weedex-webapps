@@ -1,13 +1,13 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Menu, X, ChevronLeft, ChevronRight, ExternalLink, Mail, Phone, Clock, CheckCircle, Zap, Shield, Smartphone, Send, MessageCircle } from 'lucide-react';
+import { Menu, X, ChevronLeft, ChevronRight, ExternalLink, Mail, MessageCircle, Clock, CheckCircle, Zap, Shield, Smartphone, Send, Phone } from 'lucide-react';
 
 /* ============================================
-   DATOS DE LOS DEMOS
+   DATOS DE LOS 9 DEMOS
    ============================================ */
 const DEMOS = [
   {
     id: 'barber',
-    name: 'Barbero',
+    name: 'BarberPro',
     industry: 'Barbería',
     description: 'Reserva de citas con asistente IA que responde llamadas, transcribe y agenda automáticamente.',
     subdomain: 'barber',
@@ -46,7 +46,7 @@ const DEMOS = [
   },
   {
     id: 'estetica',
-    name: 'Centro Estética',
+    name: 'Estética Pro',
     industry: 'Estética y Bienestar',
     description: 'Automatización completa de agenda para centros de estética con múltiples profesionales.',
     subdomain: 'estetica',
@@ -58,17 +58,69 @@ const DEMOS = [
     accentColor: '#34d399',
   },
   {
-    id: 'restaurante',
-    name: 'Restaurante',
-    industry: 'Hostelería',
-    description: 'Reservas y gestión de mesas con asistente IA que confirma citas y envía recordatorios.',
-    subdomain: 'restaurante',
+    id: 'concesionario',
+    name: 'AutoPrestige',
+    industry: 'Concesionario',
+    description: 'Gestión de citas y seguimiento de clientes para concesionarios de automóviles.',
+    subdomain: 'concesionario',
     screenshots: [
-      'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80',
-      'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80',
-      'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80',
+      '/assets/demos/concesionario-home.png',
+      '/assets/demos/concesionario-booking.png',
+      '/assets/demos/concesionario-admin.png',
+    ],
+    accentColor: '#60a5fa',
+  },
+  {
+    id: 'taller',
+    name: 'AutoFix Taller',
+    industry: 'Taller Mecánico',
+    description: 'Agenda citas de taller, gestiona历史的 de vehículos y envía recordatorios a clientes.',
+    subdomain: 'taller',
+    screenshots: [
+      '/assets/demos/taller-home.png',
+      '/assets/demos/taller-booking.png',
+      '/assets/demos/taller-admin.png',
     ],
     accentColor: '#fb923c',
+  },
+  {
+    id: 'spa',
+    name: 'VerdeSil Spa',
+    industry: 'SPA y Bienestar',
+    description: 'Experiencia premium de reservas para spas con múltiples tratamientos y profesionales.',
+    subdomain: 'spa',
+    screenshots: [
+      '/assets/demos/spa-home.png',
+      '/assets/demos/spa-booking.png',
+      '/assets/demos/spa-admin.png',
+    ],
+    accentColor: '#2dd4bf',
+  },
+  {
+    id: 'hotel',
+    name: 'Aurum Palace Hotel',
+    industry: 'Hostelería',
+    description: 'Sistema de reservas hotelero con gestión de habitaciones y servicios exclusivos.',
+    subdomain: 'hotel',
+    screenshots: [
+      '/assets/demos/hotel-home.png',
+      '/assets/demos/hotel-booking.png',
+      '/assets/demos/hotel-admin.png',
+    ],
+    accentColor: '#c084fc',
+  },
+  {
+    id: 'asistencia',
+    name: 'AutoRescate',
+    industry: 'Asistencia en Carretera',
+    description: 'Gestión de servicios de asistencia mecánica y grúa con seguimiento en tiempo real.',
+    subdomain: 'asistencia',
+    screenshots: [
+      '/assets/demos/asistencia-home.png',
+      '/assets/demos/asistencia-booking.png',
+      '/assets/demos/asistencia-admin.png',
+    ],
+    accentColor: '#f87171',
   },
 ];
 
@@ -196,7 +248,7 @@ function HeroSection() {
         <div className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-8 text-text-muted text-xs animate-fade-in-up" style={{ animationDelay: '400ms' }}>
           <div className="flex items-center gap-2">
             <CheckCircle className="w-4 h-4 text-accent" />
-            <span>5 demos en producción</span>
+            <span>9 demos en producción</span>
           </div>
           <div className="flex items-center gap-2">
             <CheckCircle className="w-4 h-4 text-accent" />
@@ -218,18 +270,26 @@ function HeroSection() {
 }
 
 /* ============================================
-   DEMO SCREENSHOT CAROUSEL
+   INTERNAL CAROUSEL (used inside DemoCard)
    ============================================ */
-function DemoScreenshotCarousel({ screenshots }: { screenshots: string[] }) {
+function InternalCarousel({ screenshots, accentColor }: { screenshots: string[]; accentColor: string }) {
   const [idx, setIdx] = useState(0);
 
   const prev = useCallback(() => setIdx(i => (i - 1 + screenshots.length) % screenshots.length), [screenshots.length]);
   const next = useCallback(() => setIdx(i => (i + 1) % screenshots.length), [screenshots.length]);
 
+  if (screenshots.length === 0) {
+    return (
+      <div className="aspect-[16/10] bg-surface-lowest flex items-center justify-center">
+        <span className="text-text-muted text-sm">Sin screenshots</span>
+      </div>
+    );
+  }
+
   return (
-    <div className="relative aspect-[16/10] overflow-hidden bg-surface-lowest">
-      {/* Images */
-      screenshots.map((src, i) => (
+    <div className="relative aspect-[16/10] overflow-hidden bg-surface-lowest rounded-t-2xl">
+      {/* Images */}
+      {screenshots.map((src, i) => (
         <div
           key={src}
           className="absolute inset-0 transition-opacity duration-500"
@@ -244,7 +304,7 @@ function DemoScreenshotCarousel({ screenshots }: { screenshots: string[] }) {
         </div>
       ))}
 
-      {/* Navigation arrows — only show when multiple screenshots */}
+      {/* Navigation arrows */}
       {screenshots.length > 1 && (
         <>
           <button
@@ -264,7 +324,6 @@ function DemoScreenshotCarousel({ screenshots }: { screenshots: string[] }) {
         </>
       )}
 
-      {/* Industry badge */}
       {/* Dots */}
       {screenshots.length > 1 && (
         <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
@@ -272,7 +331,8 @@ function DemoScreenshotCarousel({ screenshots }: { screenshots: string[] }) {
             <button
               key={i}
               onClick={() => setIdx(i)}
-              className={`h-1.5 rounded-full transition-all ${i === idx ? 'w-5 bg-accent' : 'w-1.5 bg-white/40 hover:bg-white/60'}`}
+              className={`h-1.5 rounded-full transition-all ${i === idx ? 'w-5' : 'w-1.5'} hover:opacity-80`}
+              style={{ backgroundColor: i === idx ? accentColor : 'rgba(255,255,255,0.4)' }}
               aria-label={`Ir a imagen ${i + 1}`}
             />
           ))}
@@ -283,67 +343,61 @@ function DemoScreenshotCarousel({ screenshots }: { screenshots: string[] }) {
 }
 
 /* ============================================
-   DEMO CARD
+   DEMO CARD (grid version)
    ============================================ */
-function DemoCard({ demo, isActive }: { demo: typeof DEMOS[0]; isActive: boolean }) {
+function DemoCardGrid({ demo }: { demo: typeof DEMOS[0] }) {
   const demoUrl = `https://${demo.subdomain}.weedex.es`;
 
   return (
-    <div className={`flex-shrink-0 w-full md:w-[480px] transition-all duration-500 ${isActive ? 'opacity-100 translate-y-0' : 'opacity-40 translate-y-4'}`}>
-      <div className="bg-background-card rounded-2xl overflow-hidden border border-border/30 hover:border-accent/30 transition-all">
-        {/* Screenshot carousel */}
-        <DemoScreenshotCarousel screenshots={demo.screenshots} />
+    <div className="bg-background-card rounded-2xl overflow-hidden border border-border/30 hover:border-border/60 hover:shadow-xl hover:shadow-accent/5 transition-all duration-300 group flex flex-col">
+      {/* Screenshot carousel */}
+      <InternalCarousel screenshots={demo.screenshots} accentColor={demo.accentColor} />
 
-        {/* Info */}
-        <div className="p-5">
-          <div className="flex items-start justify-between mb-2">
-            <div>
-              <h3 className="serif-headline text-lg text-text-primary">{demo.name}</h3>
-              <p className="text-text-muted text-xs mt-0.5">{demo.industry}</p>
-            </div>
-            {/* Demo URL badge */}
-            <div className="glass rounded-lg px-2.5 py-1.5 flex items-center gap-1.5">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              <span className="text-[9px] text-text-secondary label-text">{demo.subdomain}.weedex.es</span>
-            </div>
+      {/* Info */}
+      <div className="p-4 flex flex-col flex-1">
+        {/* Header */}
+        <div className="flex items-start justify-between mb-2 gap-2">
+          <div className="flex-1 min-w-0">
+            <h3 className="serif-headline text-base text-text-primary group-hover:text-accent transition-colors leading-tight">
+              {demo.name}
+            </h3>
+            <p className="text-text-muted text-[11px] mt-0.5">{demo.industry}</p>
           </div>
-          <p className="text-text-secondary text-sm font-light mb-4 leading-relaxed">{demo.description}</p>
-
-          <a href={demoUrl} target="_blank" rel="noopener noreferrer">
-            <button
-              className="w-full py-2.5 rounded-xl label-text text-[10px] font-bold tracking-widest flex items-center justify-center gap-2 transition-all hover:brightness-110"
-              style={{ backgroundColor: `${demo.accentColor}22`, color: demo.accentColor, border: `1px solid ${demo.accentColor}44` }}
-            >
-              <ExternalLink className="w-3.5 h-3.5" />
-              VISITAR DEMO
-            </button>
-          </a>
+          {/* Status badge */}
+          <div className="glass rounded-lg px-2 py-1 flex items-center gap-1.5 shrink-0">
+            <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
+            <span className="text-[8px] text-text-secondary label-text">LIVE</span>
+          </div>
         </div>
+
+        {/* Description */}
+        <p className="text-text-secondary text-xs font-light mb-4 leading-relaxed line-clamp-2 flex-1">
+          {demo.description}
+        </p>
+
+        {/* CTA */}
+        <a href={demoUrl} target="_blank" rel="noopener noreferrer" className="block mt-auto">
+          <button
+            className="w-full py-2.5 rounded-xl label-text text-[9px] font-bold tracking-widest flex items-center justify-center gap-1.5 transition-all hover:brightness-110"
+            style={{
+              backgroundColor: `${demo.accentColor}18`,
+              color: demo.accentColor,
+              border: `1px solid ${demo.accentColor}35`,
+            }}
+          >
+            <ExternalLink className="w-3 h-3" />
+            VER DEMO
+          </button>
+        </a>
       </div>
     </div>
   );
 }
 
 /* ============================================
-   DEMOS CAROUSEL
+   DEMOS SECTION (grid of 9 cards)
    ============================================ */
-function DemosCarousel() {
-  const [current, setCurrent] = useState(0);
-
-  const prev = useCallback(() => {
-    setCurrent(c => (c - 1 + DEMOS.length) % DEMOS.length);
-  }, []);
-
-  const next = useCallback(() => {
-    setCurrent(c => (c + 1) % DEMOS.length);
-  }, []);
-
-  // Auto-advance every 5s
-  useEffect(() => {
-    const interval = setInterval(next, 5000);
-    return () => clearInterval(interval);
-  }, [next]);
-
+function DemosGrid() {
   return (
     <section id="demos" className="py-20 md:py-32 px-6 bg-surface-lowest">
       <div className="max-w-7xl mx-auto">
@@ -351,79 +405,32 @@ function DemosCarousel() {
         <div className="text-center mb-16">
           <p className="text-accent label-text text-xs mb-4 tracking-widest">CASOS DE ÉXITO</p>
           <h2 className="serif-headline text-3xl sm:text-4xl md:text-5xl text-text-primary mb-4">
-            Demos en producción
+            9 Demos en producción
           </h2>
           <p className="text-text-secondary max-w-xl mx-auto font-light">
             Cada demo es un negocio real funcionando con nuestro sistema de asistente IA.
-            Haz clic para ver el demo completo.
+            Explora el sector que mejor se adapte a tu negocio.
           </p>
         </div>
 
-        {/* Carousel */}
-        <div className="relative">
-          {/* Cards */}
-          <div className="flex items-center justify-center gap-4 md:gap-6 overflow-hidden py-4">
-            {DEMOS.map((demo) => {
-              const isActive = demo.id === DEMOS[current].id;
-              return (
-                <div
-                  key={demo.id}
-                  className={`transition-all duration-500 ${isActive ? 'scale-100 z-10' : 'scale-90 opacity-50 z-0 hidden md:block'}`}
-                >
-                  <DemoCard demo={demo} isActive={isActive} />
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Navigation arrows */}
-          <button
-            onClick={prev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-background-card border border-border/30 flex items-center justify-center text-accent hover:border-accent/50 transition-all z-20"
-            aria-label="Demo anterior"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-          <button
-            onClick={next}
-            className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-background-card border border-border/30 flex items-center justify-center text-accent hover:border-accent/50 transition-all z-20"
-            aria-label="Siguiente demo"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
-        </div>
-
-        {/* Dots */}
-        <div className="flex justify-center gap-2 mt-8">
-          {DEMOS.map((demo, i) => (
-            <button
-              key={demo.id}
-              onClick={() => setCurrent(i)}
-              className={`h-2 rounded-full transition-all ${i === current ? 'w-8 bg-accent' : 'w-2 bg-border hover:bg-border-hover'}`}
-              aria-label={`Ir a ${demo.name}`}
-            />
-          ))}
-        </div>
-
-        {/* All demos grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 mt-12">
+        {/* Grid: 3 cols desktop, 2 tablet, 1 mobile */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {DEMOS.map((demo) => (
-            <a
-              key={demo.id}
-              href={`https://${demo.subdomain}.weedex.es`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex flex-col items-center gap-2 p-4 bg-background-card rounded-xl border border-border/30 hover:border-accent/30 transition-all text-center group"
-            >
-              <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center text-text-primary text-sm font-bold"
-                style={{ backgroundColor: `${demo.accentColor}22`, color: demo.accentColor }}
-              >
-                {demo.name[0]}
-              </div>
-              <span className="text-text-secondary text-xs group-hover:text-accent transition-colors">{demo.name}</span>
-            </a>
+            <DemoCardGrid key={demo.id} demo={demo} />
           ))}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="text-center mt-16">
+          <p className="text-text-secondary text-sm font-light mb-5">
+            ¿No encuentras tu sector? Todos los negocios pueden beneficiarse de un asistente IA.
+          </p>
+          <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer">
+            <button className="bg-accent text-text-inverse px-8 py-4 label-text font-bold text-[10px] tracking-widest hover:brightness-110 transition-all inline-flex items-center gap-2">
+              <Send className="w-4 h-4" />
+              PEDIR DEMO PERSONALIZADA
+            </button>
+          </a>
         </div>
       </div>
     </section>
@@ -712,7 +719,7 @@ export default function App() {
       <Navbar />
       <main>
         <HeroSection />
-        <DemosCarousel />
+        <DemosGrid />
         <FeaturesSection />
         <ChatMockupSection />
         <PricingTeaser />
