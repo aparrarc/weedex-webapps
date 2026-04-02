@@ -287,7 +287,7 @@ function HeroSection() {
         <div className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-8 text-text-muted text-xs animate-fade-in-up" style={{ animationDelay: '400ms' }}>
           <div className="flex items-center gap-2">
             <CheckCircle className="w-4 h-4 text-accent" />
-            <span>10 demos en producción</span>
+            <span>12 demos en producción</span>
           </div>
           <div className="flex items-center gap-2">
             <CheckCircle className="w-4 h-4 text-accent" />
