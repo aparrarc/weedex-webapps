@@ -444,7 +444,7 @@ function DemosGrid() {
         <div className="text-center mb-16">
           <p className="text-accent label-text text-xs mb-4 tracking-widest">CASOS DE ÉXITO</p>
           <h2 className="serif-headline text-3xl sm:text-4xl md:text-5xl text-text-primary mb-4">
-            10 Demos en producción
+            12 Demos en producción
           </h2>
           <p className="text-text-secondary max-w-xl mx-auto font-light">
             Cada demo es un negocio real funcionando con nuestro sistema de asistente IA.
