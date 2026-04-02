@@ -74,7 +74,7 @@ const DEMOS = [
     id: 'taller',
     name: 'AutoFix Taller',
     industry: 'Taller Mecánico',
-    description: 'Agenda citas de taller, gestiona历史的 de vehículos y envía recordatorios a clientes.',
+    description: 'Agenda citas de taller, gestiona el histórico de vehículos y envía recordatorios a clientes.',
     subdomain: 'taller',
     screenshots: [
       '/assets/demos/taller-home.png',
@@ -121,6 +121,19 @@ const DEMOS = [
       '/assets/demos/asistencia-admin.png',
     ],
     accentColor: '#f87171',
+  },
+  {
+    id: 'veterinaria',
+    name: 'VetCare',
+    industry: 'Veterinaria',
+    description: 'Gestión de citas y historial clínico para clínicas veterinarias con recordatorios WhatsApp.',
+    subdomain: 'veterinaria',
+    screenshots: [
+      '/assets/demos/veterinaria-home.png',
+      '/assets/demos/veterinaria-booking.png',
+      '/assets/demos/veterinaria-admin.png',
+    ],
+    accentColor: '#34d399',
   },
 ];
 
@@ -248,7 +261,7 @@ function HeroSection() {
         <div className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-8 text-text-muted text-xs animate-fade-in-up" style={{ animationDelay: '400ms' }}>
           <div className="flex items-center gap-2">
             <CheckCircle className="w-4 h-4 text-accent" />
-            <span>9 demos en producción</span>
+            <span>10 demos en producción</span>
           </div>
           <div className="flex items-center gap-2">
             <CheckCircle className="w-4 h-4 text-accent" />
@@ -405,7 +418,7 @@ function DemosGrid() {
         <div className="text-center mb-16">
           <p className="text-accent label-text text-xs mb-4 tracking-widest">CASOS DE ÉXITO</p>
           <h2 className="serif-headline text-3xl sm:text-4xl md:text-5xl text-text-primary mb-4">
-            9 Demos en producción
+            10 Demos en producción
           </h2>
           <p className="text-text-secondary max-w-xl mx-auto font-light">
             Cada demo es un negocio real funcionando con nuestro sistema de asistente IA.
