@@ -135,6 +135,32 @@ const DEMOS = [
     ],
     accentColor: '#34d399',
   },
+  {
+    id: 'salud',
+    name: 'MediCare Plus',
+    industry: 'Centro de Salud',
+    description: 'Gestión integral de citas médicas con asistente IA que responde llamadas, transcribe y agenda automáticamente.',
+    subdomain: 'salud',
+    screenshots: [
+      '/assets/demos/salud-home.png',
+      '/assets/demos/salud-booking.png',
+      '/assets/demos/salud-admin.png',
+    ],
+    accentColor: '#ef4444',
+  },
+  {
+    id: 'dental',
+    name: 'DentalCare',
+    industry: 'Clínica Dental',
+    description: 'Sistema de reservas para clínicas dentales con asistente IA que gestiona citas, recordatorios y seguimiento de pacientes.',
+    subdomain: 'dental',
+    screenshots: [
+      '/assets/demos/dental-home.png',
+      '/assets/demos/dental-booking.png',
+      '/assets/demos/dental-admin.png',
+    ],
+    accentColor: '#3b82f6',
+  },
 ];
 
 /* ============================================
